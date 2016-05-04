@@ -3,12 +3,26 @@
  * @param {string} element - Tag Name
  * @param {string} [className] - CSS class name
  * @param {string} [textContent] - Optional content
+ * @param {Array} [children] - Optional array of children, which are attached to the block.
  * @returns {Element}
  */
-export function block (element = "div", className, textContent) {
-    let el = document.createElement(element || "div");
-    if (className) el.className = className;
-    if (textContent) el.textContent = textContent;
+export function block (element = "div", className, textContent, children) {
+
+    let el = document.createElement(element || "div"),
+        c = children || [];
+
+    if (className instanceof Array) {
+        c = className;
+    } else if (className)
+        el.className = className;
+
+    if (textContent instanceof Array) {
+        c = textContent;
+    } else if (textContent)
+        el.textContent = textContent;
+
+    c.forEach(a => el.appendChild(a));
+
     return el;
 }
 
