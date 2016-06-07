@@ -21,7 +21,7 @@ export function block (element = "div", className, textContent, children) {
     } else if (textContent)
         el.textContent = textContent;
 
-    c.forEach(a => el.appendChild(a));
+    c.forEach(a => { if (a) el.appendChild(a) });
 
     return el;
 }
