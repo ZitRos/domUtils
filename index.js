@@ -26,6 +26,12 @@ export function block (element = "div", className, textContent, children) {
     return el;
 }
 
+export function isAppendedToDocument (element) {
+    while (element.parentNode)
+        element = element.parentNode;
+    return element instanceof Document;
+}
+
 /**
  * @param {string} type
  * @param {string} minWidth - CSS minWidth
