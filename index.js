@@ -1,7 +1,7 @@
 /**
  * Creates an element.
  * @param {string} element - Tag Name
- * @param {string} [className] - CSS class name
+ * @param {string|object} [className] - CSS class name
  * @param {string} [textContent] - Optional content
  * @param {Array} [children] - Optional array of children, which are attached to the block.
  * @returns {Element}
@@ -13,12 +13,17 @@ export function block (element = "div", className, textContent, children) {
 
     if (className instanceof Array) {
         c = className;
-    } else if (className)
+    } else if (typeof className === "string") {
         el.className = className;
+    } else if (typeof className === "object") {
+        if (className.style) el.setAttribute("style", className.style);
+        if (className.class) el.className = className.class;
+        if (className.textContent) el.textContent = className.textContent;
+    }
 
     if (textContent instanceof Array) {
         c = textContent;
-    } else if (textContent)
+    } else if (typeof textContent === "string")
         el.textContent = textContent;
 
     c.forEach(a => { if (a) el.appendChild(a) });
