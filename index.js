@@ -19,6 +19,8 @@ export function block (element = "div", className, textContent, children) {
         if (className.style) el.setAttribute("style", className.style);
         if (className.class) el.className = className.class;
         if (className.textContent) el.textContent = className.textContent;
+        if (typeof className["onClick"] === "function")
+            el.addEventListener("click", className["onClick"]);
     }
 
     if (textContent instanceof Array) {
